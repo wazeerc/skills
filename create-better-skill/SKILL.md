@@ -20,7 +20,7 @@ Three habits make this work:
 
 Check your available tools before asking anything.
 
-- If a structured question tool exists (VS Code's `ask-questions`, Claude Code's `AskUserQuestion`,
+- If a structured question tool exists (VS Code's `askQuestions`, Claude Code's `AskUserQuestion`, OpenCode's `question` or
   an equivalent native question affordance), use it for anything multiple-choice: give 2–5 options,
   mark your recommended one first and keep descriptions to one line each.
 - Open-ended questions (describe the workflow, what does "done" look like) are better as plain text
