@@ -1,147 +1,115 @@
 ---
 name: create-better-skill
-description: "**GUIDED SKILL CREATION** — build a new SKILL.md with the user one small step at a time: interview, draft early, grill the weak parts, polish, hand off. USE WHEN: the user says create a skill, make a skill for X, turn this workflow/checklist into a skill, package this into a reusable skill, improve/rewrite/review my skill or when the conversation has just followed a repeatable workflow worth capturing. DO NOT USE FOR: answering one-off coding questions (no skill needed); creating .instructions.md, .prompt.md, hooks, or custom agents — this skill helps pick the right primitive but does not create those. Adapts to the host agent: uses the ask-questions or AskUserQuestion tool when one is available, otherwise asks in plain text."
+description: Create or improve a SKILL.md with the user through a short guided interview, early drafting, and a weak-point review.
 ---
 
 # Create Better Skill
 
-You are walking beside the user. The goal is the best possible SKILL.md for *their* situation.
-Users come to skill creation with half an idea; your job is to pull the shape out of them a little at a time.
+Goal: the best possible SKILL.md for the user's situation. They arrive with half an idea; pull the shape out a little at a time.
 
-Three habits make this work:
+Three habits:
 
-1. **Small batches.** Two or three related questions per turn. Each question comes with
-   concrete options and your recommendations.
-2. **Draft early.** Once you understand the outcome, write a rough SKILL.md and iterate on it together.
-3. **Explain the why.** When you recommend a choice, say why in one line. The user learns to make the
-   next decision themselves, which is the point of walking beside them.
+1. **Small batches.** 2–3 related questions per turn, each with concrete options and your recommendation.
+2. **Draft early.** Write a rough SKILL.md as soon as the outcome is clear and iterate on it together.
+3. **Explain the why.** One line per recommendation so the user learns to make the next call themselves.
 
-## Step 0 — Detect how you can ask
+## Step 0 — Question tool
 
-Check your available tools before asking anything.
+Use the host's native question tool for anything multiple-choice — OpenCode's `question`, VS Code's `askQuestions`, Claude Code's `AskUserQuestion`, or any equivalent. Give 2–5 options, recommended option first, one line per description. Open-ended questions ("describe the workflow") are fine as plain text. Plain text is the last resort, only when no question tool exists — then use lettered options (A / B / C).
 
-- If a structured question tool exists (VS Code's `askQuestions`, Claude Code's `AskUserQuestion`, OpenCode's `question` or
-  an equivalent native question affordance), use it for anything multiple-choice: give 2–5 options,
-  mark your recommended one first and keep descriptions to one line each.
-- Open-ended questions (describe the workflow, what does "done" look like) are better as plain text
-  anyway — ask those regardless of tooling.
-- Never invent a question tool. If none is available, ask in plain text with lettered options
-  (A / B / C) so answering is still one keystroke.
+Note the host agent you are running in: it decides where the finished skill goes and which frontmatter fields are supported. Trust the user if they name a different target agent.
 
-Also note the host agent you are running in — it decides where the finished skill should be created and which frontmatter fields are supported. The user may also tell you the target agent; trust that.
+## Step 1 — Use the conversation if it already contains the workflow
 
-## Step 1 — Start from where the user already is
+Review the conversation before asking anything. If the user followed a multi-step workflow, checklist, or review process, extract the steps as they were actually done, the decision points, their quality bar, and the tools/files involved.
 
-Before asking anything, review the conversation. If the user has been following a multi-step workflow, checklist, debugging method, or review process — even loosely — you already have the skill. Extract:
+Propose it in one message — "You did X → Y → Z with a check at each step. Capture that as a skill?" — and once confirmed, go straight to drafting.
 
-- the step-by-step process as they actually did it
-- the decision points where they branched or corrected you
-- their quality bar
-- the tools and files involved
+Otherwise, go to Step 2.
 
-Present it as a proposal: "You've been doing X → Y → Z with a check at each step. Want me to capture that as a skill?"
-Confirm the outline in one short message, then move to drafting.
+## Step 2 — Confirm a skill is the right primitive
 
-If the conversation contains no workflow, go to Step 2.
-
-## Step 2 — Make sure a skill is the right primitive
-
-Skills are one of several customization types. Spending the interview on the wrong one wastes the
-user's time, so spend 30 seconds checking. Ask only if genuinely ambiguous.
+Spend 30 seconds checking; ask only if genuinely ambiguous.
 
 | The user wants... | Better primitive |
 | --- | --- |
-| Something applied to *most* work in a project, always on | Instructions file (`.instructions.md` / `AGENTS.md`) |
-| A single focused task with inputs, run via a slash command | Prompt (`.prompt.md`) |
-| A subagent with context isolation or per-stage tool restrictions | Custom agent (`.agent.md`) |
-| Deterministic enforcement at tool lifecycle events (block, format, gate) | Hook (`.json`) |
+| Always-on guidance for most project work | Instructions (`.instructions.md` / `AGENTS.md`) |
+| One focused task with inputs, run by slash command | Prompt (`.prompt.md`) |
+| Context isolation or per-stage tool limits | Custom agent (`.agent.md`) |
+| Deterministic enforcement at tool events | Hook (`.json`) |
 | Integration with an external API/system | MCP server |
-| An on-demand workflow, especially with bundled scripts/templates | **Skill — you are here** |
+| An on-demand workflow, possibly with scripts/templates | **Skill — you are here** |
 
-If another primitive fits better, say so plainly, tell the user why and offer to help with that instead. Do not force their request into a skill.
+If another primitive fits better, say so and offer that instead. Don't force the request into a skill.
 
-## Step 3 — The guided interview
+## Step 3 — Interview
 
-Work through these themes one turn at a time. Skip any theme the user already answered and skip
-anything they tell you to decide yourself (then tell them what you decided and why).
+One theme per turn. Skip themes the user already answered or delegated to you — tell them what you decided and why.
 
 | # | Theme | What you need |
 | --- | --- | --- |
-| 1 | Outcome | What the skill produces or makes possible. One sentence, concrete verb. |
-| 2 | Trigger | The phrases a user would actually type that should activate it — at least 3, in the user's own vocabulary. |
-| 3 | Shape | Checklist, multi-step workflow, reference-heavy knowledge, or script-driven? |
-| 4 | Inputs & outputs | What goes in (files, URLs, arguments?) and what "done" looks like (file written? report? code changed?). |
-| 5 | Scope | Where it lives (this project / personal across projects) and which agent(s) it must work in. |
-| 6 | Assets | Any scripts, templates, or example files that should ship inside the skill folder. |
+| 1 | Outcome | What the skill produces. One sentence with a concrete verb. |
+| 2 | Trigger | At least 3 phrases the user would actually type, in their vocabulary. |
+| 3 | Shape | Checklist, multi-step workflow, reference-heavy, or script-driven? |
+| 4 | Inputs & outputs | What goes in (files, URLs, arguments) and what "done" looks like. |
+| 5 | Scope | Project-level by default; global only if the user asks. Which agent(s) it must work in. |
+| 6 | Assets | Scripts, templates, or examples to ship inside the skill. |
 
-Interview rules:
+Rules:
 
-- **One theme per turn.** Don't ask about packaging while the outcome is still fuzzy.
-- **Offer options with a recommendation.** "Shape: (A) 5-step workflow with a checklist at the end —
-  I'd start here, (B) compact checklist, (C) reference doc the agent consults. Which fits?"
-- **Mirror back.** Before moving to the next theme, paraphrase the user's answer and ask whether you understood it correctly.
-- **Watch for fatigue.** After two rounds of questions, offer: "I can draft now and assume X and Y —
-  we'll fix anything wrong in the review."
+- Offer options with a recommendation through the question tool.
+- Mirror the answer back before moving to the next theme.
+- After two rounds, offer to draft with assumptions and fix anything wrong in review.
 
 ## Step 4 — Draft immediately
 
-Once themes 1–3 are answered, write the SKILL.md. Do not wait for completeness — fill gaps with clearly marked assumptions (`<!-- assumption: ... -->`) and list them for the user.
+Once themes 1–3 are answered, write the SKILL.md. Fill gaps with `<!-- assumption: ... -->` and list them for the user.
 
-Use this layout when the generated skill needs bundled resources:
+Layout when bundled resources are needed:
 
 ```
 <skill-name>/
 ├── SKILL.md          # name + description frontmatter, then the workflow
-├── references/       # optional: deep docs loaded only when needed
-├── scripts/          # optional: deterministic code the agent runs
-└── assets/           # optional: templates/files copied into outputs
+├── references/       # deep docs, loaded only when needed
+├── scripts/          # deterministic code the agent runs
+└── assets/           # templates/files copied into outputs
 ```
 
-- `name` must match the folder name exactly (lowercase, hyphens) — mismatch fails silently.
-- `description` is the discovery surface: it carries everything about *when* to trigger. Write it
-  from the trigger phrases collected in Step 3, keep it slightly pushy and quote it if it contains
-  colons.
-- Body under ~500 lines; push anything longer into `references/` with a "read this when..." pointer.
+- `name` must match the folder name (lowercase, hyphens).
+- `description` is the discovery surface: real trigger phrases plus a do-not-use boundary. Quote it if it contains colons.
+- Keep the body under ~500 lines; move longer content to `references/` with a "read this when..." pointer.
+- Write it simple and direct: short imperative instructions, no filler or repeated context.
 
-Save it, then show the user the path, the description and a 3-line summary of the workflow.
-Create it in the scope selected during the interview: the current project's skill directory for project scope, or the host agent's global skill directory for global scope.
-Do not install or publish it unless the user explicitly asks.
-Run the self-review in Step 5, then ask the user the anchored questions it produces.
+Save it to the project-level skills directory your own host uses — decide this yourself, don't ask the user (e.g. `.github/skills` for Copilot, `.opencode/skills` for OpenCode, `.agents/skills` for cross-agent). Go global only if the user asks. Then show the user the path, the description, and a 3-line workflow summary. Don't install or publish unless asked. Run Step 5.
 
 ## Step 5 — Grill the weak parts
 
-Read your own draft with fresh eyes and find the places a fresh agent would guess. Typically:
+Re-read the draft and find where a fresh agent would have to guess:
 
 - vague verbs ("handle the data", "process the request") — what literally happens?
-- missing error paths — what should the agent do when the input is wrong or a step fails?
+- missing error paths — what should happen when input is wrong or a step fails?
 - unstated quality bar — how does the agent know the output is good?
-- a description that lists features but contains none of the user's trigger phrases
+- a description without real trigger phrases
 - steps that assume a tool, file, or credential that may not exist
 
-Pick the 2–3 worst and ask about those *specifically*, quoting the offending line.
-Anchored questions are cheap to answer; "anything else?" is not. Wait for the user's answers before finalizing the draft.
-Apply the answers and any requested changes, then return to Step 5 if the changes introduce new uncertainty.
-Proceed to Step 6 only when the user has no further corrections or has explicitly accepted the remaining assumptions.
+Ask about the 2–3 worst specifically, quoting the offending line. Wait for answers, apply them, and repeat until the user has no corrections or explicitly accepts the remaining assumptions.
 
 ## Step 6 — Validate
 
-Run this checklist against the final draft:
-
 - [ ] Folder name == frontmatter `name`
-- [ ] Frontmatter is valid YAML: no tabs, colons inside values quoted, apostrophes not breaking scalars
-- [ ] `description` contains the real trigger phrases and a do-not-use boundary
-- [ ] Every reference file is mentioned with *when* to read it
-- [ ] Instructions explain why, not just a wall of MUST/NEVER
-- [ ] No secrets, tokens, or absolute paths to the user's machine
+- [ ] Frontmatter is valid YAML: no tabs, colons inside values quoted
+- [ ] `description` contains trigger phrases and a do-not-use boundary
+- [ ] Every reference file says *when* to read it
+- [ ] Instructions explain why, not just MUST/NEVER
+- [ ] Simple and direct: imperative sentences, no filler
+- [ ] No secrets, tokens, or absolute paths
 - [ ] Body < ~500 lines; heavy content lives in references/scripts
 
-Fix anything that fails, then confirm the fixes in one line each.
+Fix anything that fails and confirm each fix in one line.
 
 ## Step 7 — Hand off
 
-Wrap up with four short things:
-
-1. **What the skill does** — two sentences, plain language.
-2. **Example prompts to try it** — three realistic sentences the user could type right now. These double as trigger tests: if the skill doesn't fire on them, the description needs work.
-3. **A suggested test** — offer to run the first example prompt for real, or to run a fuller evaluate/iterate loop if the user wants more rigor.
-4. **Next steps** — state the exact project or global path where the skill was created and how the user can invoke it there.
+1. **What it does** — two sentences.
+2. **Example prompts** — three realistic prompts the user could type now; they double as trigger tests.
+3. **Suggested test** — ask whether to run the first prompt for real.
+4. **Next steps** — the exact path where the skill was created and how to invoke it.
