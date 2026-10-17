@@ -5,7 +5,7 @@ Agent skills by [wazeerc](https://www.skills.sh/wazeerc) — browse and install 
 ## Installation
 
 ```bash
-npx skills add wazeerc/create-better-skill
+npx skills add wazeerc/skills
 ```
 
 Add `--skill create-better-skill` or `--skill chrome-validation` to install just one.
