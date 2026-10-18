@@ -8,7 +8,7 @@ Agent skills by [wazeerc](https://www.skills.sh/wazeerc) — browse and install 
 npx skills add wazeerc/skills
 ```
 
-Add `--skill create-better-skill` or `--skill chrome-validation` to install just one.
+Add `--skill create-better-skill`, `--skill chrome-validation`, or `--skill cleaner-commits` to install just one.
 
 ## create-better-skill
 
@@ -35,3 +35,7 @@ Validate a feature in a real Chrome browser with Chrome DevTools MCP: exercise t
 ```
 
 Requires the [Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp/) server. If it isn't connected, the skill stops with setup instructions.
+
+## cleaner-commits
+
+Use validated [Conventional Commits](https://www.conventionalcommits.org/) when writing commit messages.
