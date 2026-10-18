@@ -48,15 +48,17 @@ One theme per turn. Skip themes the user already answered or delegated to you â€
 
 | # | Theme | What you need |
 | --- | --- | --- |
-| 1 | Outcome | What the skill produces. One sentence with a concrete verb. |
-| 2 | Trigger | At least 3 phrases the user would actually type, in their vocabulary. |
-| 3 | Shape | Checklist, multi-step workflow, reference-heavy, or script-driven? |
-| 4 | Inputs & outputs | What goes in (files, URLs, arguments) and what "done" looks like. |
-| 5 | Scope | Project-level by default; global only if the user asks. Which agent(s) it must work in. |
-| 6 | Assets | Scripts, templates, or examples to ship inside the skill. |
+| 1 | Name | The new skill's folder and frontmatter name, using lowercase hyphens. |
+| 2 | Outcome | What the skill produces. One sentence with a concrete verb. |
+| 3 | Trigger | At least 3 phrases the user would actually type, in their vocabulary. |
+| 4 | Shape | Checklist, multi-step workflow, reference-heavy, or script-driven? |
+| 5 | Inputs & outputs | What goes in (files, URLs, arguments) and what "done" looks like. |
+| 6 | Scope | Project-level by default; global only if the user asks. Which agent(s) it must work in. |
+| 7 | Assets | Scripts, templates, or examples to ship inside the skill. |
 
 Rules:
 
+- Ask for the new skill name before drafting. Normalize it to lowercase hyphens and confirm before creating the folder.
 - Offer options with a recommendation through the question tool.
 - Mirror the answer back before moving to the next theme.
 - After two rounds, offer to draft with assumptions and fix anything wrong in review.
