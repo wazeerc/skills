@@ -1,6 +1,6 @@
 ---
 name: create-better-skill
-description: "Creates an Agent Skill (SKILL.md) through a short interview, an early draft, and a weak-point review. Use when the user asks to create or write a skill or SKILL.md, or to turn this conversation's workflow into a reusable skill. Not for editing an existing skill, instructions files, prompt files, custom agents, hooks, or MCP servers."
+description: "Generates an Agent Skill through a short interview, an early draft, and a weak-point review. Use when the user asks to create or write a skill or SKILL.md, or to turn this conversation's workflow into a reusable skill. Not for editing an existing skill, instructions files, prompt files, custom agents, hooks, or MCP servers."
 ---
 
 # Create Better Skill

@@ -1,6 +1,6 @@
 ---
 name: cleaner-commits
-description: "Create Conventional Commits when committing changes."
+description: "Write cleaner commit messages that follow Conventional Commits."
 ---
 
 # Cleaner Commits
