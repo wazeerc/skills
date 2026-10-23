@@ -8,7 +8,7 @@ Agent skills by [wazeerc](https://www.skills.sh/wazeerc) — browse and install 
 npx skills add wazeerc/skills
 ```
 
-Add `--skill create-better-skill`, `--skill chrome-validation`, or `--skill cleaner-commits` to install just one.
+Add `--skill create-better-skill`, `--skill chrome-validation`, `--skill jest-coverage`, or `--skill cleaner-commits` to install just one.
 
 ## create-better-skill
 
@@ -35,6 +35,16 @@ Validate a feature in a real Chrome browser with Chrome DevTools MCP: exercise t
 ```
 
 Requires the [Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp/) server. If it isn't connected, the skill stops with setup instructions.
+
+## jest-coverage
+
+Check whether a React branch has enough Jest coverage to support a PR. It runs your existing coverage command, reads `coverage/lcov.info`, and compares project-wide and changed-file coverage against your Jest config or an 80% fallback.
+
+```
+/jest-coverage check coverage against main
+```
+
+Reports PASS, FAIL, or BLOCKED with the command, targets, per-file results, and next steps. It won't write tests or change thresholds.
 
 ## cleaner-commits
 
