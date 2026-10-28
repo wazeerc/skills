@@ -1,11 +1,18 @@
 ---
 name: cleaner-commits
-description: "Write cleaner commit messages that follow Conventional Commits."
+description: "MUST be used whenever creating a Git commit: group changes into focused commits and write Conventional Commit messages."
 ---
 
 # Cleaner Commits
 
-Use these rules whenever the host AI agent creates a Git commit, ensuring the commit message follows Conventional Commits.
+Use these rules whenever the host AI agent creates a Git commit, ensuring each commit covers one logical concern and its message follows Conventional Commits.
+
+## Commit grouping
+
+- Commit one logical concern at a time; never mix unrelated changes.
+- Keep each commit independently reviewable, revertible, and working on its own.
+- Separate mechanical changes (formatting, renames, dependencies) from behavior changes, and keep tests/docs with the change they support.
+- Stage per concern with explicit paths or `git add -p`, not `git add .` or `git add -A`.
 
 ## Rules
 
@@ -28,6 +35,8 @@ Use these rules whenever the host AI agent creates a Git commit, ensuring the co
 
 ## Quality check
 
+- Each commit contains one logical concern, and unrelated changes are in separate commits.
+- The staged diff matches the commit's type and scope.
 - The type accurately describes the primary change.
 - The subject is imperative, specific, and short.
 - The scope is included only when confidently inferred.
